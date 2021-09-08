@@ -77,7 +77,7 @@ drawer: Drawer(
             ),
 
             ListTile(
-              title: const Text('Informações', style: TextStyle(fontSize: 25),),
+              title: const Text('Informaçõess', style: TextStyle(fontSize: 25),),
               onTap: () {
                 
                 Navigator.pop(context);
