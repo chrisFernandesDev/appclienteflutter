@@ -1,5 +1,8 @@
 
 import 'package:appclienteflutter/models/produto_model.dart';
+import 'package:appclienteflutter/pages/feminino_page.dart';
+import 'package:appclienteflutter/pages/infantil_page.dart';
+import 'package:appclienteflutter/pages/masculino_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -49,25 +52,29 @@ drawer: Drawer(
       ListTile(
               title: const Text('Masculino', style: TextStyle(fontSize: 25),),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeMasculino()),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MasculinoPage()),
+                );
               },
             ),
             ListTile(
               title: const Text('Feminino', style: TextStyle(fontSize: 25),),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeFeminino()),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FemininoPage()),
+                );
               },
             ),
             ListTile(
               title: const Text('Infantil', style: TextStyle(fontSize: 25),),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => InfantilPage()),
+                );
               },
             ),
             ListTile(
               title: const Text('Promoções', style: TextStyle(fontSize: 25),),
               onTap: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
+              //  );
               },
             ),
 
@@ -140,7 +147,7 @@ flexibleSpace: Container(
 //PRODUTOS DO FIREBASE-------------------------------------------------------------            
       Padding(
         padding: const EdgeInsets.all(30),
-        child: Text("Nossos Produtos",)
+        child: Text("Nossos Produtos", style: TextStyle(fontSize: 25),)
       ),   
       
 FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
