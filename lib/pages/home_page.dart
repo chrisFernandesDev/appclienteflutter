@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:appclienteflutter/models/produto_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -208,3 +209,5 @@ FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
 
 
 
+=======
+>>>>>>> 4c20b69826be9ed3f16c7cfea254512088651583
