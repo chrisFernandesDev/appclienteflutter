@@ -1,7 +1,9 @@
+
 import 'package:appclienteflutter/models/produto_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
 
 
 
@@ -11,6 +13,7 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 
 class _HomePageState extends State<HomePage>{
 
@@ -203,6 +206,7 @@ FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
     );
   }
 }
+
 
 
 
