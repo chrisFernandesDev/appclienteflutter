@@ -1,21 +1,22 @@
-import 'package:appclienteflutter/models/produto_model.dart';
+import '../controllers/produto_controllers.dart';
+import '../controllers/user_controllers.dart';
+import '../models/pedido_model.dart';
+import '../models/produto_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class InfantilPage extends StatefulWidget {
-  @override 
+  @override
   _InfantilPageState createState() => _InfantilPageState();
 }
+
 // heloo everybody
 class _InfantilPageState extends State<InfantilPage> {
-  // TODO AQUI VAI ENTRAR O PROVIDER E USER_CONTROLLER
-
-  //   late final clienteController = Provider.of<ClienteController>(
-  //   context,
-  //   listen: false,
-  // );
-
-  // TODO AQUI VAI ENTRAR O PROVIDER E USER_CONTROLLER
+  late final userController = Provider.of<UserController>(
+    context,
+    listen: false,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,8 @@ class _InfantilPageState extends State<InfantilPage> {
           }).toList();
 
           return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
             itemCount: produtos.length,
             itemBuilder: (context, index) {
               final produto = produtos[index];
@@ -59,20 +61,39 @@ class _InfantilPageState extends State<InfantilPage> {
                   children: [Icon(Icons.paid_rounded), Text(produto.marca)],
                 ),
                 leading: produto.imagem != null
-                ? Image.memory(
-                  produto.imagem!,
-                  fit: BoxFit.cover,
-                  width: 72,
-                )
-                : Container(
-                  child: Icon(Icons.card_giftcard),
-                  width: 72,
-                  height: double.maxFinite,
-                  color: Colors.blue,
+                    ? Image.memory(
+                        produto.imagem!,
+                        fit: BoxFit.cover,
+                        width: 72,
+                      )
+                    : Container(
+                        child: Icon(Icons.card_giftcard),
+                        width: 72,
+                        height: double.maxFinite,
+                        color: Colors.blue,
+                      ),
+                trailing: IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  onPressed: () {
+                    final novaCompra = PedidoModel(
+                            clienteKey: userController.user!.uid,
+                            pedido: produtoController.produto,
+                            clienteNome: userController.model.nome,
+                            key: produto.key!
+                            )
+                        .toMap();
+
+                    
+
+                    FirebaseFirestore.instance
+                        .collection('vendas')
+                        .add(novaCompra);
+
+                    setState(() {
+                      produtoController.produto.clear();
+                    });
+                  },
                 ),
-                onTap: (){
-          
-                },
               );
             },
           );
