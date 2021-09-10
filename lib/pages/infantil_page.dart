@@ -2,7 +2,6 @@ import 'package:appclienteflutter/pages/carrinho_page.dart';
 
 import '../controllers/produto_controllers.dart';
 import '../controllers/user_controllers.dart';
-import '../models/pedido_model.dart';
 import '../models/produto_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -89,9 +88,10 @@ class _InfantilPageState extends State<InfantilPage> {
                       marca: produto.marca,
                       nome: produto.nome,
                       preco: produto.preco,
-                      tamanho: produto.tamanho,                      
+                      tamanho: produto.tamanho,   
+                      imagem: produto.imagem,                   
                     ).toMap();
-                    produtoController.addProduto(produtos);
+                    produtoController.addProduto(produtos); print(produtos);
                   }
                 ),
               );
