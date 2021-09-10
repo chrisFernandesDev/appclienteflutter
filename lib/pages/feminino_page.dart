@@ -1,6 +1,12 @@
+import 'package:appclienteflutter/controllers/produto_controllers.dart';
+import 'package:appclienteflutter/controllers/user_controllers.dart';
+import 'package:provider/provider.dart';
+
 import '../models/produto_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'carrinho_page.dart';
 
 class FemininoPage extends StatefulWidget {
   @override
@@ -8,6 +14,10 @@ class FemininoPage extends StatefulWidget {
 }
 // heloo everybodyrr
 class _FemininoPageState extends State<FemininoPage> {
+    late final userController = Provider.of<UserController>(
+    context,
+    listen: false,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +28,7 @@ class _FemininoPageState extends State<FemininoPage> {
             icon: const Icon(Icons.shopping_cart),
             tooltip: 'Seu carrinho de compras',
             onPressed: () {
-              // handle the press
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
             },
           ),
         ],
@@ -58,6 +68,7 @@ class _FemininoPageState extends State<FemininoPage> {
             itemBuilder: (context, index) {
               final produto = produtos[index];
               return ListTile(
+                
                 title: Text(produto.categoria),
                 subtitle: Row(
                   children: [Icon(Icons.paid_rounded), Text(produto.marca)],
@@ -74,9 +85,24 @@ class _FemininoPageState extends State<FemininoPage> {
                   height: double.maxFinite,
                   color: Colors.blue,
                 ),
-                onTap: (){
-
-                },
+                trailing: IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  
+                  onPressed: () async {
+                    final produtos = ProdutoModel(
+                      ownerKey: produto.ownerKey, 
+                      categoria: produto.categoria,
+                      cor: produto.cor,
+                      descricao: produto.descricao,
+                      marca: produto.marca,
+                      nome: produto.nome,
+                      preco: produto.preco,
+                      tamanho: produto.tamanho,   
+                      imagem: produto.imagem,                   
+                    ).toMap();
+                    produtoController.addProduto(produtos); print(produtos);
+                  }
+                ),
               );
             },
           );
