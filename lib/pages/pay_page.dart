@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'carrinho_page.dart';
+
 class PayPage extends StatefulWidget {
   PayPage({Key? key}) : super(key: key);
 
@@ -18,6 +20,15 @@ class _PayPageState extends State<PayPage> {
     return Scaffold(
        appBar: AppBar(
          title:Text("Formas de Pagamentos"),
+         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.white,),
+            tooltip: 'Seu carrinho de compras',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
+            },
+          ),
+        ],
           flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
