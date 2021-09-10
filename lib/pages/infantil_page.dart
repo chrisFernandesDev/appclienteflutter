@@ -1,3 +1,5 @@
+import 'package:appclienteflutter/pages/carrinho_page.dart';
+
 import '../controllers/produto_controllers.dart';
 import '../controllers/user_controllers.dart';
 import '../models/pedido_model.dart';
@@ -18,6 +20,8 @@ class _InfantilPageState extends State<InfantilPage> {
     listen: false,
   );
 
+  // final ProdutoModel produto;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +32,7 @@ class _InfantilPageState extends State<InfantilPage> {
             icon: const Icon(Icons.shopping_cart),
             tooltip: 'Seu carrinho de compras',
             onPressed: () {
-              // handle the press
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
             },
           ),
         ],
@@ -72,27 +76,23 @@ class _InfantilPageState extends State<InfantilPage> {
                         height: double.maxFinite,
                         color: Colors.blue,
                       ),
+                      
                 trailing: IconButton(
                   icon: Icon(Icons.shopping_cart),
-                  onPressed: () {
-                    final novaCompra = PedidoModel(
-                            clienteKey: userController.user!.uid,
-                            pedido: produtoController.produto,
-                            clienteNome: userController.model.nome,
-                            key: produto.key!
-                            )
-                        .toMap();
-
-                    
-
-                    FirebaseFirestore.instance
-                        .collection('vendas')
-                        .add(novaCompra);
-
-                    setState(() {
-                      produtoController.produto.clear();
-                    });
-                  },
+                  
+                  onPressed: () async {
+                    final produtos = ProdutoModel(
+                      ownerKey: produto.ownerKey, 
+                      categoria: produto.categoria,
+                      cor: produto.cor,
+                      descricao: produto.descricao,
+                      marca: produto.marca,
+                      nome: produto.nome,
+                      preco: produto.preco,
+                      tamanho: produto.tamanho,                      
+                    ).toMap();
+                    produtoController.addProduto(produtos);
+                  }
                 ),
               );
             },
