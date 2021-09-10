@@ -131,26 +131,32 @@ class _HomePageState extends State<HomePage> {
       ),
 
 //CAROUSEL ----------------------------------------------------------------------
-
-      body: SingleChildScrollView(
+      
+      body: 
+      
+      SingleChildScrollView(
           child: Column(
         children: [
-          CarouselSlider(
-            options: CarouselOptions(
-              autoPlay: true,
-            ),
-            items: imagesList
-                .map(
-                  (item) => Center(
-                    child: Image.network(
-                      item,
-                      fit: BoxFit.cover,
-                      height: 600,
-                      width: 900,
+        // SizedBox(height: 8,),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                autoPlay: true,
+              ),
+              items: imagesList
+                  .map(
+                    (item) => Center(
+                      child: Image.network(
+                        item,
+                        fit: BoxFit.cover,
+                        height: 600,
+                        width: 900,
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
+                  )
+                  .toList(),
+            ),
           ),
 
 //PRODUTOS DO FIREBASE-------------------------------------------------------------
