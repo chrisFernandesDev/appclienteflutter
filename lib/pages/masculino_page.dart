@@ -34,6 +34,20 @@ class _MasculinoPageState extends State<MasculinoPage> {
             },
           ),
         ],
+
+         flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+        ),
       ),
         body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
@@ -57,8 +71,8 @@ class _MasculinoPageState extends State<MasculinoPage> {
             itemBuilder: (context, index) {
               final produto = produtos[index];
               return ListTile(
-                title: Text(produto.categoria),
-                subtitle: Row(
+                // title: Text(produto.categoria),
+                subtitle: Column(
                   children: [Icon(Icons.paid_rounded), Text(produto.marca)],
                 ),
                 leading: produto.imagem != null

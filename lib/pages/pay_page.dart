@@ -17,7 +17,20 @@ class _PayPageState extends State<PayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-         title:Text("Formas de Pagamentos")
+         title:Text("Formas de Pagamentos"),
+          flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+        ),
        ),
 
        body:Column(
@@ -42,7 +55,7 @@ class _PayPageState extends State<PayPage> {
           Container(
                     
                     child: Image.asset(
-                      "assets/images/formas-pagto1.jpg",
+                      "img/formas-pagto1.jpg",
                       height: 420,
                       width: 420,
                       alignment: Alignment.center,

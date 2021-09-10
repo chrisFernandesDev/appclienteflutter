@@ -1,10 +1,17 @@
+
+import 'package:appclienteflutter/controllers/user_controllers.dart';
 import 'package:appclienteflutter/models/produto_model.dart';
+
+import 'package:appclienteflutter/pages/edit_page.dart';
 import 'package:appclienteflutter/pages/feminino_page.dart';
 import 'package:appclienteflutter/pages/infantil_page.dart';
 import 'package:appclienteflutter/pages/masculino_page.dart';
+import 'package:appclienteflutter/pages/pay_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -28,29 +35,46 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // var userController;
+
+    late final userController = Provider.of<UserController>(
+      context,
+      listen: false,
+    );
+
+
     return Scaffold(
 //DRAWER ------------------------------------------------------------------------------
 
       drawer: Drawer(
+
+        
         child: Column(
+          
           children: [
+
+            
             UserAccountsDrawerHeader(
               currentAccountPicture: Image.network(
                   'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
-              accountName: Text(
-                'Usuario',
-                style: TextStyle(fontSize: 20),
-              ),
-              accountEmail: Text(
-                'usuario@gmail.com',
-                style: TextStyle(fontSize: 18),
-              ),
+              // accountName: Text(
+              //   'Usuario',
+              //   style: TextStyle(fontSize: 18),
+              // ),
+              // accountEmail: Text(
+              //   'usuario@gmail.com',
+              //   style: TextStyle(fontSize: 16),
+              // ),
+              accountName: Text(userController.model.nome),
+              accountEmail: Text(userController.user!.email!),
+              
             ),
+
             ListTile(
+              leading: Icon(Icons.male),
               title: const Text(
                 'Masculino',
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 18),
+
               ),
               onTap: () {
                 Navigator.push(
@@ -60,49 +84,86 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
+
+              leading: Icon(Icons.female),
               title: const Text(
                 'Feminino',
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => FemininoPage()),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FemininoPage()),
+
                 );
               },
             ),
             ListTile(
+
+              leading: Icon(Icons.child_care),
               title: const Text(
                 'Infantil',
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => InfantilPage()),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InfantilPage()),
+
                 );
               },
             ),
             ListTile(
+
+              leading: Icon(Icons.shop),
               title: const Text(
                 'Promoções',
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 18),
+
               ),
               onTap: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
               },
             ),
             ListTile(
-              title: const Text('_______________________________'),
+              title: const Text('__________________________________________',
+              style: TextStyle(color: Colors.grey),
+              ),
+
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
+
+              leading: Icon(Icons.info),
               title: const Text(
-                'Informaçõess',
-                style: TextStyle(fontSize: 25),
+                'Informações',
+                style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PayPage()),
+                );
               },
             ),
+            ListTile(
+              leading: Icon(Icons.edit),
+              title: const Text(
+                'Atualizar Cadastro',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EditPage(usuarios: userController.model)),
+                );
+              },
+            ),
+
           ],
         ),
       ),
@@ -120,26 +181,30 @@ class _HomePageState extends State<HomePage> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+
+                  
                   colors: <Color>[
-                Color(0xff0097E3),
-                Color(0xffCA2547),
-              ])),
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+
         ),
         centerTitle: true,
       ),
 
 //CAROUSEL ----------------------------------------------------------------------
-      
-      body: 
-      
-      SingleChildScrollView(
+
+
+      body: SingleChildScrollView(
           child: Column(
         children: [
-        // SizedBox(height: 8,),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
+
             child: CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
@@ -164,6 +229,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(30),
               child: Text(
                 "Nossos Produtos",
+
+                style: TextStyle(fontSize: 30),
+                
+
+
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
