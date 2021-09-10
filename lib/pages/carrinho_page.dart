@@ -1,20 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class CarrinhoPage extends StatefulWidget {
-
-//   @override
-//   _CarrinhoPageState createState() => _CarrinhoPageState();
-// }
-
-// class _CarrinhoPageState extends State<CarrinhoPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Text('uiiiiiiiii'),
-//     );
-//   }
-// }
-
 import 'package:appclienteflutter/models/pedido_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -42,12 +25,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
       body: Container(
         child: AnimatedBuilder(
             animation: produtoController,
-            builder: (context, Widget? child) {
-              return produtoController.produto.isEmpty
-                
-                  ? 
-                
-                  Container(
+            builder: (context, Widget? child) => Container(
                     
                       child: TextButton(
                         child: Text('Comprar'),
@@ -55,18 +33,10 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           final novaCompra = PedidoModel(
                                   clienteKey: userController.user!.uid,
                                   pedido: produtoController.produto,
-                                  
                                   clienteNome: userController.model.nome,
-                                  key: userController.model.key!
-
-                                  // key do cliente
-                                  // ownerKey produto = key vendedor
-                                  //
+                                  // key: userController.model.key!
                                   )
-                              .toMap();
-
-                          // final List<PedidoModel> listaProdutos = [];
-                              
+                              .toMap();                              
 
                           FirebaseFirestore.instance
                               .collection('vendas')
@@ -81,10 +51,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           // );
                         },
                       ),
-                    )
-                  : 
-                  Text('para de encher o saco!');
-            }),
+                    )),
       ),
 
     
