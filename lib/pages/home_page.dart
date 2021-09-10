@@ -1,11 +1,15 @@
-
+import 'package:appclienteflutter/controllers/user_controllers.dart';
 import 'package:appclienteflutter/models/produto_model.dart';
+
+import 'package:appclienteflutter/pages/edit_page.dart';
+import 'package:appclienteflutter/pages/feminino_page.dart';
+import 'package:appclienteflutter/pages/infantil_page.dart';
+import 'package:appclienteflutter/pages/masculino_page.dart';
+import 'package:appclienteflutter/pages/pay_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-
-
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -14,13 +18,10 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
-class _HomePageState extends State<HomePage>{
-
+class _HomePageState extends State<HomePage> {
 //IMAGENS CAROUSEL--------------------------------------------------------------------
 
-final List<String> imagesList = [
-    
+  final List<String> imagesList = [
     'https://images.unsplash.com/photo-1544754565-5655962dc338?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
     'https://images.unsplash.com/photo-1465877783223-4eba513e27c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
     'https://images.unsplash.com/photo-1606318175645-8e425336f08f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80',
@@ -32,183 +33,240 @@ final List<String> imagesList = [
 
   @override
   Widget build(BuildContext context) {
-    var userController;
-    return Scaffold(
-      
+    late final userController = Provider.of<UserController>(
+      context,
+      listen: false,
+    );
 
+    return Scaffold(
 //DRAWER ------------------------------------------------------------------------------
 
-drawer: Drawer(
-  child: Column(
-    children:[
-      UserAccountsDrawerHeader(
-        currentAccountPicture: Image.network('https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
-        accountName: Text('Usuario', style: TextStyle(fontSize: 20),), 
-        accountEmail: Text('usuario@gmail.com', style: TextStyle(fontSize: 18),),
+      drawer: Drawer(
+        
+        child: Column(
+          
+          children: [
+
+            
+            UserAccountsDrawerHeader(
+              currentAccountPicture: Image.network(
+                  'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
+              // accountName: Text(
+              //   'Usuario',
+              //   style: TextStyle(fontSize: 18),
+              // ),
+              // accountEmail: Text(
+              //   'usuario@gmail.com',
+              //   style: TextStyle(fontSize: 16),
+              // ),
+              accountName: Text(userController.model.nome),
+              accountEmail: Text(userController.user!.email!),
+              
+            ),
+
+            ListTile(
+              leading: Icon(Icons.male),
+              title: const Text(
+                'Masculino',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MasculinoPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.female),
+              title: const Text(
+                'Feminino',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FemininoPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.child_care),
+              title: const Text(
+                'Infantil',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InfantilPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shop),
+              title: const Text(
+                'Promoções',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
+              },
+            ),
+            ListTile(
+              title: const Text('__________________________________________',
+              style: TextStyle(color: Colors.grey),
+              ),
+
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: const Text(
+                'Informações',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PayPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.edit),
+              title: const Text(
+                'Atualizar Cadastro',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EditPage(usuarios: userController.model)),
+                );
+              },
+            ),
+          ],
+        ),
       ),
-      ListTile(
-              title: const Text('Masculino', style: TextStyle(fontSize: 25),),
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeMasculino()),
-              },
-            ),
-            ListTile(
-              title: const Text('Feminino', style: TextStyle(fontSize: 25),),
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeFeminino()),
-              },
-            ),
-            ListTile(
-              title: const Text('Infantil', style: TextStyle(fontSize: 25),),
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
-              },
-            ),
-            ListTile(
-              title: const Text('Promoções', style: TextStyle(fontSize: 25),),
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
-              },
-            ),
-
-            ListTile(
-              title: const Text('_______________________________'),
-              onTap: () {
-                
-                Navigator.pop(context);
-              },
-            ),
-
-            ListTile(
-              title: const Text('Informaçõess', style: TextStyle(fontSize: 25),),
-              onTap: () {
-                
-                Navigator.pop(context);
-              },
-            ),
-],
-  ),
-),
-
 
 //BARRA SUPERIOR ------------------------------------------------------------------
 
       appBar: AppBar(
-        title: Text ("MAX Shoes", style: TextStyle(
-          fontSize: 18,
-          // fontWeight: FontWeight.w100,
+        title: Text(
+          "MAX Shoes",
+          style: TextStyle(
+            fontSize: 18,
+            // fontWeight: FontWeight.w100,
+          ),
         ),
-        ),
-        
-flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color(0xff0097E3),
-                  Color(0xffCA2547),
-          ])
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
         ),
+        centerTitle: true,
       ),
-      centerTitle: true,
-    ),
-  
-
 
 //CAROUSEL ----------------------------------------------------------------------
 
-      body:SingleChildScrollView(
-        child: Column(
-          children: [
-            CarouselSlider(
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
               ),
-              items: imagesList.map(
-                (item) => Center(
-                  child: Image.network(
-                    item,
-                    fit: BoxFit.cover,
-                    height: 600,
-                    width: 900,
-                  ),
-                ),
-              ).toList(),
+              items: imagesList
+                  .map(
+                    (item) => Center(
+                      child: Image.network(
+                        item,
+                        fit: BoxFit.cover,
+                        height: 600,
+                        width: 900,
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
+          ),
 
-//PRODUTOS DO FIREBASE-------------------------------------------------------------            
-      Padding(
-        padding: const EdgeInsets.all(30),
-        child: Text("Nossos Produtos",)
-      ),   
-      
-FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        future: FirebaseFirestore.instance
-            .collection('produtos')
-            .get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final produtos = snapshot.data!.docs.map(
-            (item) {
-              final dados = item.data();
-              return ProdutoModel.fromMap(dados);
-            },
-          ).toList();
+//PRODUTOS DO FIREBASE-------------------------------------------------------------
+          Padding(
+              padding: const EdgeInsets.all(30),
+              child: Text(
+                "Nossos Produtos",
+                style: TextStyle(fontSize: 30),
+                
+              )),
 
-        return Column(
-          children: produtos.map(
-            (produto){
-              return Container(
-                width: double.maxFinite,
-                child: ListTile(
-                  leading: produto.imagem != null
-                      ? Image.memory(
-                          produto.imagem!,
-                          fit: BoxFit.contain,
-                          width: 125,
-                          height: 125,
-                        )
-                      : Container(
-                          width: 125,
-                          height: 125,
-                          color: Colors.blue,
+          FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              future: FirebaseFirestore.instance.collection('produtos').get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                final produtos = snapshot.data!.docs.map(
+                  (item) {
+                    final dados = item.data();
+                    return ProdutoModel.fromMap(dados);
+                  },
+                ).toList();
+
+                return Column(
+                    children: produtos.map(
+                  (produto) {
+                    return Container(
+                      width: double.maxFinite,
+                      child: ListTile(
+                        leading: produto.imagem != null
+                            ? Image.memory(
+                                produto.imagem!,
+                                fit: BoxFit.contain,
+                                width: 125,
+                                height: 125,
+                              )
+                            : Container(
+                                width: 125,
+                                height: 125,
+                                color: Colors.blue,
+                              ),
+                        title: Text(
+                          produto.nome,
+                          style: TextStyle(fontSize: 21),
                         ),
-                  title: Text(
-                    produto.nome,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  subtitle: Text(
-                    produto.descricao,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  trailing: Text(
-                    "R\$ ${produto.preco}",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ),
-              );
-            },
-          ).toList()
-        );
-      }
-    )
-
-
-
-          ],
-        )
-      ),
+                        subtitle: Text(
+                          produto.descricao,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: Text(
+                          "R\$ ${produto.preco}",
+                          style: TextStyle(fontSize: 21),
+                        ),
+                      ),
+                    );
+                  },
+                ).toList());
+              })
+        ],
+      )),
     );
   }
 }
-
-
-
-
-
-

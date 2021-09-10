@@ -29,7 +29,7 @@ class UserModel {
     );
   }
 
-  Map<String, dynamic> toMap([String? key]) {
+  Map<String, dynamic> toMap() {
     return {
       'nome': nome,
       'email': email,

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               create: (context) => UserController(),
               child: MaterialApp(
                 theme: ThemeData(
-                  primarySwatch: Colors.pink,
+                  primarySwatch: Colors.lightBlue,
                 ),
                 home: SplashPage(),
                 debugShowCheckedModeBanner: false,
