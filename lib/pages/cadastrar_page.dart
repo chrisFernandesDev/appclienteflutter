@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:appclienteflutter/controllers/user_controllers.dart';
+import 'package:file_picker/file_picker.dart';
 import '../models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,8 @@ class _SignUpPageState extends State<SignUpPage> {
   String tel = "";
   String email = "";
   String senha = "";
+  Uint8List? file;
+
 
   late final userController = Provider.of<UserController>(
     context,
@@ -287,6 +292,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
+                  ElevatedButton(
+                  onPressed: () async {
+                    final result = await FilePicker.platform
+                        .pickFiles(type: FileType.image);
+                    if (result != null) {
+                      setState(() {
+                        final bytes = result.files.first.bytes;
+                        file = bytes;
+                      });
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Icon(file != null ? Icons.check : Icons.upload),
+                      Text("Adicionar foto"),
+                    ],
+                  ),
+                ),
+
                   Container(
                     margin: EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
@@ -314,7 +338,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               cpf: cpf,
                               end: end,
                               cep: cep,
-                              tel: tel);
+                              tel: tel,
+                              imagem: file,
+
+                          );
                           setState(() {
                             isLoading = true;
                           });

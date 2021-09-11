@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:appclienteflutter/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,7 +23,7 @@ class _EditPageState extends State<EditPage> {
   late final telCont = TextEditingController()..text = widget.usuarios.tel;
   late final emailCont = TextEditingController()..text = widget.usuarios.email;
   late final keyCont = TextEditingController()..text = widget.usuarios.key!;
-  // late Uint8List? file = widget.usuarios.imagem;
+  late Uint8List? file = widget.usuarios.imagem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,25 +104,25 @@ class _EditPageState extends State<EditPage> {
               const SizedBox(
                 height: 8,
               ),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     final result =
-              //         await FilePicker.platform.pickFiles(type: FileType.image);
+              ElevatedButton(
+                onPressed: () async {
+                  final result =
+                      await FilePicker.platform.pickFiles(type: FileType.image);
 
-              //     if (result != null) {
-              //       setState(() {
-              //         final bytes = result.files.first.bytes;
-              //         file = bytes;
-              //       });
-              //     }
-              //   },
-              //   child: Row(
-              //     children: [
-              //       Icon(file != null ? Icons.check : Icons.upload),
-              //       Text("Adicionar imagem"),
-              //     ],
-              //   ),
-              // ),
+                  if (result != null) {
+                    setState(() {
+                      final bytes = result.files.first.bytes;
+                      file = bytes;
+                    });
+                  }
+                },
+                child: Row(
+                  children: [
+                    Icon(file != null ? Icons.check : Icons.upload),
+                    Text("Adicionar imagem"),
+                  ],
+                ),
+              ),
               const SizedBox(height: 8),
               OutlinedButton(
                   onPressed: () async {
@@ -130,8 +133,8 @@ class _EditPageState extends State<EditPage> {
                             cep: cepCont.text,
                             tel: telCont.text,
                             cpf: cpfCont.text,
-                            email: emailCont.text
-                            // imagem: file,
+                            email: emailCont.text,
+                            imagem: file,
                             )
                         .toMap();
                     print(atualizado);
