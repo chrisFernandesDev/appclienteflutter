@@ -12,6 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
+
+
+import 'carrinho_page.dart';
+
+
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -182,6 +187,30 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
+
+
+
+           ListTile(
+              title: const Text('__________________________________________',
+              style: TextStyle(color: Colors.grey),
+              ),
+           ),
+
+             ListTile(
+              leading: IconButton(
+            onPressed: () async {
+              await userController.logout();
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+                        title: const Text(
+                'Sair',
+                style: TextStyle(fontSize: 18),
+              ),
+
+            ),
+
+
           ],
         ),
       ),
@@ -190,12 +219,22 @@ class _HomePageState extends State<HomePage> {
 
       appBar: AppBar(
         title: Text(
-          "MAX Shoes",
+          "MaxShoes",
+          
           style: TextStyle(
             fontSize: 18,
             // fontWeight: FontWeight.w100,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.white,),
+            tooltip: 'Seu carrinho de compras',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
+            },
+          ),
+        ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: <Color>[

@@ -25,7 +25,7 @@ class _FemininoPageState extends State<FemininoPage> {
         title: Text('feminino'),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart, color: Colors.white,),
             tooltip: 'Seu carrinho de compras',
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
