@@ -25,6 +25,20 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
+
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+        ),
       ),
       body: Stack(
         children: <Widget>[
@@ -46,11 +60,11 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 90),
+              margin: EdgeInsets.only(top: 0),
               alignment: Alignment.topCenter,
               child: Image(
-                  height:
-                      MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
+                  height: 350,
+                      // MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
                   fit: BoxFit.contain,
                   image: AssetImage('img/logo1.gif')),
             ),

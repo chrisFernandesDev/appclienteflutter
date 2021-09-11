@@ -1,3 +1,7 @@
+import 'dart:html';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:typed_data';
+
 class UserModel {
   final String nome;
   final String email;
@@ -6,6 +10,7 @@ class UserModel {
   final String cep;
   final String tel;
   final String? key;
+  final Uint8List? imagem;
 
   UserModel({
     required this.nome,
@@ -15,6 +20,7 @@ class UserModel {
     required this.cep,
     required this.tel,
     this.key,
+    this.imagem
   });
 
   static UserModel fromMap(Map<String, dynamic> map) {
@@ -26,6 +32,8 @@ class UserModel {
       cep: map['cep'],
       tel: map['tel'],
       key: map['key'],
+      imagem: map['imagem']?.bytes,
+
     );
   }
 
@@ -38,6 +46,8 @@ class UserModel {
       'cep': cep,
       'tel': tel,
       'key': key,
+      'imagem': imagem != null ? Blob(imagem!) : null,
+
     };
   }
 }

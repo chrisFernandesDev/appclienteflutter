@@ -1,9 +1,9 @@
-
 import 'package:appclienteflutter/controllers/user_controllers.dart';
 import 'package:appclienteflutter/models/produto_model.dart';
 
 import 'package:appclienteflutter/pages/edit_page.dart';
 import 'package:appclienteflutter/pages/feminino_page.dart';
+import 'package:appclienteflutter/pages/historico_page.dart';
 import 'package:appclienteflutter/pages/infantil_page.dart';
 import 'package:appclienteflutter/pages/masculino_page.dart';
 import 'package:appclienteflutter/pages/pay_page.dart';
@@ -11,7 +11,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
-
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -35,46 +34,60 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     late final userController = Provider.of<UserController>(
       context,
       listen: false,
     );
 
-
     return Scaffold(
 //DRAWER ------------------------------------------------------------------------------
 
       drawer: Drawer(
-
-        
         child: Column(
-          
-          children: [
 
-            
-            UserAccountsDrawerHeader(
-              currentAccountPicture: Image.network(
-                  'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
-              // accountName: Text(
-              //   'Usuario',
-              //   style: TextStyle(fontSize: 18),
-              // ),
-              // accountEmail: Text(
-              //   'usuario@gmail.com',
-              //   style: TextStyle(fontSize: 16),
-              // ),
-              accountName: Text(userController.model.nome),
-              accountEmail: Text(userController.user!.email!),
+
+          children: [
+            Container(
+              // width: double.maxFinite,
               
+
+              decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  tileMode: TileMode.clamp),
             ),
 
+              child: UserAccountsDrawerHeader(
+
+                currentAccountPicture: CircleAvatar(
+                foregroundImage: MemoryImage(userController.model.imagem!)),
+
+                // currentAccountPicture: Image.network(
+                //     'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
+                // accountName: Text(
+                //   'Usuario',
+                //   style: TextStyle(fontSize: 18),
+                // ),
+                // accountEmail: Text(
+                //   'usuario@gmail.com',
+                //   style: TextStyle(fontSize: 16),
+                // ),
+                accountName: Text(userController.model.nome),
+                accountEmail: Text(userController.user!.email!),
+              ),
+            ),
             ListTile(
               leading: Icon(Icons.male),
               title: const Text(
                 'Masculino',
                 style: TextStyle(fontSize: 18),
-
               ),
               onTap: () {
                 Navigator.push(
@@ -84,7 +97,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-
               leading: Icon(Icons.female),
               title: const Text(
                 'Feminino',
@@ -94,12 +106,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => FemininoPage()),
-
                 );
               },
             ),
             ListTile(
-
               leading: Icon(Icons.child_care),
               title: const Text(
                 'Infantil',
@@ -109,33 +119,29 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => InfantilPage()),
-
                 );
               },
             ),
             ListTile(
-
               leading: Icon(Icons.shop),
               title: const Text(
                 'Promoções',
                 style: TextStyle(fontSize: 18),
-
               ),
               onTap: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
               },
             ),
             ListTile(
-              title: const Text('__________________________________________',
-              style: TextStyle(color: Colors.grey),
+              title: const Text(
+                '__________________________________________',
+                style: TextStyle(color: Colors.grey),
               ),
-
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-
               leading: Icon(Icons.info),
               title: const Text(
                 'Informações',
@@ -145,6 +151,19 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PayPage()),
+                );
+              },
+            ),
+             ListTile(
+              leading: Icon(Icons.info),
+              title: const Text(
+                'Histórico de Compras',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HistoricoPage()),
                 );
               },
             ),
@@ -163,7 +182,6 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-
           ],
         ),
       ),
@@ -180,31 +198,23 @@ class _HomePageState extends State<HomePage> {
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-
-                  
-                  colors: <Color>[
-                  Color(0xfff8f9fa),
-                  Color(0xffced4da),
-                  Color(0xff89c2d9),
-                  Color(0xff014f86),
-              ]
-              )
-              ),
-
+              gradient: LinearGradient(colors: <Color>[
+            Color(0xfff8f9fa),
+            Color(0xffced4da),
+            Color(0xff89c2d9),
+            Color(0xff014f86),
+          ])),
         ),
         centerTitle: true,
       ),
 
 //CAROUSEL ----------------------------------------------------------------------
 
-
       body: SingleChildScrollView(
           child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-
             child: CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
@@ -229,11 +239,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(30),
               child: Text(
                 "Nossos Produtos",
-
                 style: TextStyle(fontSize: 30),
-                
-
-
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -252,39 +258,39 @@ class _HomePageState extends State<HomePage> {
                 ).toList();
 
                 return Column(
-                    children: produtos.map(
-                  (produto) {
-                    return Container(
-                      width: double.maxFinite,
-                      child: ListTile(
-                        leading: produto.imagem != null
-                            ? Image.memory(
-                                produto.imagem!,
-                                fit: BoxFit.contain,
-                                width: 125,
-                                height: 125,
-                              )
-                            : Container(
-                                width: 125,
-                                height: 125,
-                                color: Colors.blue,
-                              ),
-                        title: Text(
-                          produto.nome,
-                          style: TextStyle(fontSize: 21),
-                        ),
-                        subtitle: Text(
-                          produto.descricao,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        trailing: Text(
-                          "R\$ ${produto.preco}",
-                          style: TextStyle(fontSize: 21),
-                        ),
-                      ),
-                    );
-                  },
-                ).toList());
+                          children: produtos.map(
+                        (produto) {
+                          return ListTile(
+                            leading: produto.imagem != null
+                                ? Image.memory(
+                                    produto.imagem!,
+                                    fit: BoxFit.contain,
+                                    // width: 125,
+                                    // height: 125,
+                                    width: 72,
+                                    height: double.maxFinite,
+                                  )
+                                : Container(
+                                    width: 125,
+                                    height: 125,
+                                    color: Colors.blue,
+                                  ),
+                            title: Text( 
+                              produto.nome,
+                              style: TextStyle(fontSize: 21),
+                            ),
+                            subtitle: Text(
+                              produto.descricao,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            trailing: Text(
+                              "R\$ ${produto.preco}",
+                              style: TextStyle(fontSize: 21),
+                            ),
+                          );
+                        },
+                      ).toList());
+                
               })
         ],
       )),

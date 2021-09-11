@@ -46,7 +46,8 @@ class _FemininoPageState extends State<FemininoPage> {
               ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      body: 
+      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('produtos')
             .where('categoria', isEqualTo: 'feminino')
