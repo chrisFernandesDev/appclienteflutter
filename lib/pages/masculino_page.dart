@@ -67,27 +67,30 @@ class _MasculinoPageState extends State<MasculinoPage> {
           }).toList();
 
           return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
-            itemCount: produtos.length,
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, childAspectRatio: 2,),
+            
+            itemCount: produtos.length,            
             itemBuilder: (context, index) {
               final produto = produtos[index];
-              return Padding(
-                padding: const EdgeInsets.only(top: 8, left: 6, right: 6),
+              return SafeArea(
+                child: Container(
+                padding: EdgeInsets.all(10),
                 child: ListTile(
                   title: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(4.0),
                     child: produto.imagem != null
                         ? Image.memory(
                             produto.imagem!,
                             fit: BoxFit.cover,
                             width: 72,
-                            height: 120,
+                            height: 100,
                           )
                         : Container(
                             child: Icon(Icons.card_giftcard),
                             width: 72,
-                            height: 120,
+                            height: 100,
                             color: Colors.blue,
                           ),
                   ),
@@ -153,7 +156,7 @@ class _MasculinoPageState extends State<MasculinoPage> {
                         backgroundColor: Colors.black54),
                   ),
                 ),
-              );
+              ));
             },
           );
         },
