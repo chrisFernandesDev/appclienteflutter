@@ -11,11 +11,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
-
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'carrinho_page.dart';
-
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -49,30 +47,23 @@ class _HomePageState extends State<HomePage> {
 
       drawer: Drawer(
         child: Column(
-
-
           children: [
             Container(
-              // width: double.maxFinite,
-              
-
               decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: <Color>[
-                  Color(0xfff8f9fa),
-                  Color(0xffced4da),
-                  Color(0xff89c2d9),
-                  Color(0xff014f86)
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  tileMode: TileMode.clamp),
-            ),
-
+                gradient: LinearGradient(
+                    colors: <Color>[
+                      Color(0xfff8f9fa),
+                      Color(0xffced4da),
+                      Color(0xff89c2d9),
+                      Color(0xff014f86)
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    tileMode: TileMode.clamp),
+              ),
               child: UserAccountsDrawerHeader(
-
                 currentAccountPicture: CircleAvatar(
-                foregroundImage: MemoryImage(userController.model.imagem!)),
+                    foregroundImage: MemoryImage(userController.model.imagem!)),
 
                 // currentAccountPicture: Image.network(
                 //     'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
@@ -137,14 +128,10 @@ class _HomePageState extends State<HomePage> {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
               },
             ),
-            ListTile(
-              title: const Text(
-                '__________________________________________',
-                style: TextStyle(color: Colors.grey),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            Container(
+              width: 250.0,
+              height: 1.0,
+              color: Colors.grey,
             ),
             ListTile(
               leading: Icon(Icons.info),
@@ -159,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-             ListTile(
+            ListTile(
               leading: Icon(Icons.info),
               title: const Text(
                 'Histórico de Compras',
@@ -187,30 +174,23 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-
-
-
-           ListTile(
-              title: const Text('__________________________________________',
-              style: TextStyle(color: Colors.grey),
-              ),
-           ),
-
-             ListTile(
+            Container(
+              width: 250.0,
+              height: 1.0,
+              color: Colors.grey,
+            ),
+            ListTile(
               leading: IconButton(
-            onPressed: () async {
-              await userController.logout();
-            },
-            icon: Icon(Icons.exit_to_app),
-          ),
-                        title: const Text(
+                onPressed: () async {
+                  await userController.logout();
+                },
+                icon: Icon(Icons.exit_to_app),
+              ),
+              title: const Text(
                 'Sair',
                 style: TextStyle(fontSize: 18),
               ),
-
             ),
-
-
           ],
         ),
       ),
@@ -220,18 +200,20 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           "MaxShoes",
-          
           style: TextStyle(
             fontSize: 18,
-            // fontWeight: FontWeight.w100,
           ),
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.white,),
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
             tooltip: 'Seu carrinho de compras',
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CarrinhoPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CarrinhoPage()));
             },
           ),
         ],
@@ -275,10 +257,10 @@ class _HomePageState extends State<HomePage> {
 
 //PRODUTOS DO FIREBASE-------------------------------------------------------------
           Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(20),
               child: Text(
-                "Nossos Produtos",
-                style: TextStyle(fontSize: 30),
+                "Promoções Especiais",
+                style: TextStyle(fontSize: 20),
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -297,40 +279,56 @@ class _HomePageState extends State<HomePage> {
                 ).toList();
 
                 return Column(
-                          children: produtos.map(
-                        (produto) {
-                          return ListTile(
-                            leading: produto.imagem != null
-                                ? Image.memory(
-                                    produto.imagem!,
-                                    fit: BoxFit.contain,
-                                    // width: 125,
-                                    // height: 125,
-                                    width: 72,
-                                    height: double.maxFinite,
-                                  )
-                                : Container(
-                                    width: 125,
-                                    height: 125,
-                                    color: Colors.blue,
-                                  ),
-                            title: Text( 
-                              produto.nome,
-                              style: TextStyle(fontSize: 21),
+                    children: produtos.map(
+                  (produto) {
+                    return ListTile(
+                      leading: produto.imagem != null
+                          ? Image.memory(
+                              produto.imagem!,
+                              fit: BoxFit.contain,
+                              width: 72,
+                              height: 120,
+                            )
+                          : Container(
+                              width: 125,
+                              height: 125,
+                              color: Colors.blue,
                             ),
-                            subtitle: Text(
-                              produto.descricao,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            trailing: Text(
-                              "R\$ ${produto.preco}",
-                              style: TextStyle(fontSize: 21),
-                            ),
-                          );
-                        },
-                      ).toList());
-                
-              })
+                      title: Text(
+                        produto.marca,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      subtitle: Text(
+                        produto.descricao,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      trailing: Text(
+                        "R\$ ${produto.preco}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    );
+                  },
+                ).toList());
+              }),
+
+          Container(
+            child: RatingBar.builder(
+              initialRating: 0,
+              minRating: 0,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                // print("");
+              },
+            ),
+          ),
+
         ],
       )),
     );
