@@ -56,7 +56,8 @@ class _HistoricoPageState extends State<HistoricoPage> {
                 return ListTile(
                 leading: Icon(Icons.person),
                 title: Text(usuario.clienteNome),
-                subtitle:Text(usuario.clienteKey),
+                // subtitle:Text(usuario.pedido.join({})),
+                subtitle: Text('${usuario.pedido[0]['preco']}'),
 
                   // tileColor: cor,
                 );
