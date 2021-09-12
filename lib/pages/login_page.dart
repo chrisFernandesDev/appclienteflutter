@@ -20,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
     listen: false,
   );
 
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +132,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
+                CheckboxListTile(
+                    checkColor: Colors.white,
+                    value: isChecked,
+                    title: Text("Deseja se manter logado?"),
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+              ),
+                  
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(
@@ -174,24 +187,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                Text("OU"),
-
                 MaterialButton(
-                  child: Container(
-                    decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                     color: Color(0xff468faf),
-                  ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 42.0),
-                      child: Text(
-                        'Cadastrar',
-                        style: TextStyle(
-                          color: Color(0xff343a40),
-                          fontSize: 21.0,
-                        ),
-                      ),
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text("Cadastrar", 
+                    style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15.0,
                     ),
+                  ),
+                  
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -200,7 +204,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     );
                   },
-                )
+                ),
+
+                
               ],
             ),
           ),
