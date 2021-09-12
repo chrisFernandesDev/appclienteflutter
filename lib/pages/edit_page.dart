@@ -35,7 +35,7 @@ class _EditPageState extends State<EditPage> {
                     .delete();
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.delete)),
+              icon: Icon(Icons.delete, color: Colors.white,)),
         ],
          flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -142,7 +142,8 @@ class _EditPageState extends State<EditPage> {
 
                     Navigator.pop(context);
                   },
-                  child: Text("Atualizar Usuario"))
+                  child: Text("Atualizar Usuario")),
+                  
             ],
           ),
         ),
