@@ -147,8 +147,12 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    color: Color(0xff468faf),
-                     
+                    gradient: LinearGradient(
+                        colors: <Color>[
+                          Color.fromRGBO(232,231,238,1),
+                          Color.fromRGBO(48,136,233,1),
+                          ],
+                        ),
                   ),
                   child: MaterialButton(
                     highlightColor: Colors.transparent,
@@ -158,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         'Login',
                         style: TextStyle(
-                          color: Color(0xff343a40),
+                          color: Colors.black,
                           fontSize: 21.0,
                         ),
                       ),

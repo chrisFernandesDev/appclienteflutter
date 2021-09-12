@@ -71,18 +71,16 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 10),
                 alignment: Alignment.topCenter,
                 child: Image(
-                    height:
-                        MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
                     fit: BoxFit.contain,
                     image: AssetImage('img/logo1.gif')),
               ),
             ),
+            
             Container(
               margin:
-                  EdgeInsets.only(top: 220, right: 30, bottom: 30, left: 30),
+                  EdgeInsets.only(top: 295, right: 30, left: 30),
               child: Column(
                 children: [
                   if (isLoading) CircularProgressIndicator(),
@@ -104,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.user,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Name',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -134,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.file,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'CPF',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -159,12 +157,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
                       onChanged: (texto) => end = texto,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.locationArrow,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Endereço',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -174,7 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Container(
                     width: 250.0,
                     height: 1.0,
-                    color: Colors.red,
+                    color: Colors.blue,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -187,14 +185,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     padding: EdgeInsets.all(5),
                     child: TextField(
                       textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.numberWithOptions(),
                       onChanged: (texto) => cep = texto,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.animation_rounded,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'CEP',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -217,14 +215,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     padding: EdgeInsets.all(5),
                     child: TextField(
                       textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.phone,
                       onChanged: (texto) => tel = texto,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.phone,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Telefone',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -247,14 +245,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     padding: EdgeInsets.all(5),
                     child: TextField(
                       textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                       onChanged: (texto) => email = texto,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.email,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Email',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -280,42 +278,54 @@ class _SignUpPageState extends State<SignUpPage> {
                       keyboardType: TextInputType.text,
                       obscureText: true,
                       onChanged: (texto) => senha = texto,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.lock,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Senha',
                         hintStyle: TextStyle(fontSize: 16.0),
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                  onPressed: () async {
-                    final result = await FilePicker.platform
-                        .pickFiles(type: FileType.image);
-                    if (result != null) {
-                      setState(() {
-                        final bytes = result.files.first.bytes;
-                        file = bytes;
-                      });
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Icon(file != null ? Icons.check : Icons.upload),
-                      Text("Adicionar foto"),
-                    ],
-                  ),
-                ),
 
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.all(30),
+                    child: 
+                      ElevatedButton(
+                      onPressed: () async {
+                        final result = await FilePicker.platform
+                            .pickFiles(type: FileType.image);
+                        if (result != null) {
+                          setState(() {
+                            final bytes = result.files.first.bytes;
+                            file = bytes;
+                          });
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Icon(file != null ? Icons.check : Icons.upload),
+                          Text("Adicionar foto de perfil"),
+                        ],
+                      ),
+                ),
+                    
+                  ),
+
+                  Container(
+                    // margin: EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      color: Color(0xff468faf),
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color.fromRGBO(232,231,238,1),
+                          Color.fromRGBO(48,136,233,1),
+                         
+                          ],
+                        ),
                     ),
                     child: MaterialButton(
                       highlightColor: Colors.transparent,
@@ -325,7 +335,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           'Cadastrar',
                           style: TextStyle(
-                            color: Color(0xff343a40),
+                            color: Colors.black,
                             fontSize: 21.0,
                           ),
                         ),
