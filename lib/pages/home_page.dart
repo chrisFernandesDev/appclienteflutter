@@ -7,6 +7,7 @@ import 'package:appclienteflutter/pages/historico_page.dart';
 import 'package:appclienteflutter/pages/infantil_page.dart';
 import 'package:appclienteflutter/pages/masculino_page.dart';
 import 'package:appclienteflutter/pages/pay_page.dart';
+import 'package:appclienteflutter/pages/promocoes_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -125,7 +126,8 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => NomeInfantil()),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PromocaoPage()),
+                );
               },
             ),
             Container(
@@ -264,7 +266,8 @@ class _HomePageState extends State<HomePage> {
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              future: FirebaseFirestore.instance.collection('produtos').get(),
+              future: FirebaseFirestore.instance.collection('produtos')
+              .get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
