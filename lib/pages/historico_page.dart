@@ -21,7 +21,7 @@ class _HistoricoPageState extends State<HistoricoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Usuários"),
+        title: Text("Histórico de compras"),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
@@ -49,15 +49,23 @@ class _HistoricoPageState extends State<HistoricoPage> {
               itemBuilder: (context, index) {
               final usuario = usuarios[index];
 
-                // var cor = usuario.clienteKey == userController.model.key
-                //     ? Colors.red
-                //     : Colors.white;
-
                 return ListTile(
+                  isThreeLine: true,
                 leading: Icon(Icons.person),
-                title: Text(usuario.clienteNome),
-                // subtitle:Text(usuario.pedido.join({})),
-                subtitle: Text('${usuario.pedido[0]['preco']}'),
+                trailing: Text(usuario.clienteNome),
+                subtitle: Row(
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      child: Image.memory(usuario.pedido[0]['imagem'].bytes)),
+                    Container(child: Text('${usuario.pedido[0]['marca']}')),
+                    Container(child: Text('${usuario.pedido[0]['categoria']}')),
+                    Container(child: Text('${usuario.pedido[0]['preco']}')),
+                    // Text('${usuario.pedido[0]['preco']}'),
+
+                  ],
+                ),
 
                   // tileColor: cor,
                 );
