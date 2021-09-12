@@ -63,19 +63,10 @@ class _HomePageState extends State<HomePage> {
                     tileMode: TileMode.clamp),
               ),
               child: UserAccountsDrawerHeader(
+
                 currentAccountPicture: CircleAvatar(
                     foregroundImage: MemoryImage(userController.model.imagem!)),
 
-                // currentAccountPicture: Image.network(
-                //     'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'),
-                // accountName: Text(
-                //   'Usuario',
-                //   style: TextStyle(fontSize: 18),
-                // ),
-                // accountEmail: Text(
-                //   'usuario@gmail.com',
-                //   style: TextStyle(fontSize: 16),
-                // ),
                 accountName: Text(userController.model.nome),
                 accountEmail: Text(userController.user!.email!),
               ),
@@ -259,10 +250,15 @@ class _HomePageState extends State<HomePage> {
 
 //PRODUTOS DO FIREBASE-------------------------------------------------------------
           Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(
-                "Promoções Especiais",
-                style: TextStyle(fontSize: 20),
+              padding: const EdgeInsets.all(20),              
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Acesse o menu e confira nossas Promoções",
+                    style: TextStyle(fontSize: 20), 
+                  ),
+                ],
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(

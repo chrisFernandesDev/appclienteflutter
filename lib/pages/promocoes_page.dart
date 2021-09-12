@@ -98,7 +98,7 @@ class _PromocaoPageState extends State<PromocaoPage> {
                               color: Colors.blue,
                             ),
                       title: Text(
-                        produto.marca,
+                        '${produto.marca}' + '  (${produto.categoria})',
                         style: TextStyle(fontSize: 16),
                       ),
                       subtitle: Text(

@@ -99,9 +99,11 @@ class _MasculinoPageState extends State<MasculinoPage> {
                           height: 5,
                         ),
                         Text(
-                          produto.marca,
+                          '${produto.marca} ' + '  R\$ ${produto.preco}',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                          
+
                         ),
                         SizedBox(
                           height: 5,
@@ -109,14 +111,14 @@ class _MasculinoPageState extends State<MasculinoPage> {
                         Text(
                           produto.descricao,
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+                              fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black),
                         ),
                         SizedBox(
                           width: 10,
                         ),
-                        Container(
-                          child: Text('R\$ ${produto.preco}', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600,),),
-                        ),
+                        // Container(
+                        //   child: Text('R\$ ${produto.preco}', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600,),),
+                        // ),
                       ],
                     ),
                   ),
