@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                     tileMode: TileMode.clamp),
               ),
               child: UserAccountsDrawerHeader(
-
                 currentAccountPicture: CircleAvatar(
                     foregroundImage: MemoryImage(userController.model.imagem!)),
 
@@ -255,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Acesse o menu e confira nossas Promoções",
+                    "Promoções da Semana",
                     style: TextStyle(fontSize: 20), 
                   ),
                 ],
