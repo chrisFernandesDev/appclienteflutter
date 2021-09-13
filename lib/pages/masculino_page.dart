@@ -26,7 +26,7 @@ class _MasculinoPageState extends State<MasculinoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('masculino'),
+        title: Text('Masculino'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -119,9 +119,6 @@ class _MasculinoPageState extends State<MasculinoPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        // Container(
-                        //   child: Text('R\$ ${produto.preco}', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600,),),
-                        // ),
                       ],
                     ),
                   ),
