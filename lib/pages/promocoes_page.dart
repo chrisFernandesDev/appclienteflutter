@@ -1,3 +1,4 @@
+import 'package:appclienteflutter/controllers/produto_controllers.dart';
 import 'package:appclienteflutter/controllers/user_controllers.dart';
 import 'package:appclienteflutter/models/produto_model.dart';
 
@@ -54,65 +55,118 @@ class _PromocaoPageState extends State<PromocaoPage> {
         ),
         centerTitle: true,
       ),
-      body:
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: FirebaseFirestore.instance
+            .collection('produtos')
+            .where('promocao', isEqualTo: true)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-          // Padding(
-          //     padding: const EdgeInsets.all(20),
-          //     child: Text(
-          //       "Promoções Especiais",
-          //       style: TextStyle(fontSize: 20),
-          //     )),
+          final produtos = snapshot.data!.docs.map((map) {
+            final data = map.data();
+            return ProdutoModel.fromMap(data, map.id);
+          }).toList();
 
-          FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              future: FirebaseFirestore.instance
-                  .collection('produtos')
-                  .where('promocao', isEqualTo: true)
-                  .get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final produtos = snapshot.data!.docs.map(
-                  (item) {
-                    final dados = item.data();
-                    return ProdutoModel.fromMap(dados);
-                  },
-                ).toList();
+          return GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, childAspectRatio: 2,),
+            
+            itemCount: produtos.length,            
+            itemBuilder: (context, index) {
+              final produto = produtos[index];
+              return SafeArea(
+                child: Container(
+                padding: EdgeInsets.all(10),
+                child: ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: produto.imagem != null
+                        ? Image.memory(
+                            produto.imagem!,
+                            fit: BoxFit.cover,
+                            width: 72,
+                            height: 100,
+                          )
+                        : Container(
+                            child: Icon(Icons.card_giftcard),
+                            width: 72,
+                            height: 100,
+                            color: Colors.blue,
+                          ),
+                  ),
+                  tileColor: Colors.black12,
+                  subtitle: Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          '${produto.marca} ' + '  R\$ ${produto.preco}',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                          
 
-                return Column(
-                    children: produtos.map(
-                  (produto) {
-                    return ListTile(
-                      leading: produto.imagem != null
-                          ? Image.memory(
-                              produto.imagem!,
-                              fit: BoxFit.contain,
-                              width: 72,
-                              height: 120,
-                            )
-                          : Container(
-                              width: 125,
-                              height: 125,
-                              color: Colors.blue,
-                            ),
-                      title: Text(
-                        '${produto.marca}' + '  (${produto.categoria})',
-                        style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          produto.descricao,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        // Container(
+                        //   child: Text('R\$ ${produto.preco}', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600,),),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  trailing: OutlinedButton(
+                    onPressed: () {},
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.add,
+                        size: 30,
+                        color: Colors.white,
                       ),
-                      subtitle: Text(
-                        produto.descricao,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      trailing: Text(
-                        "R\$ ${produto.preco}",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    );
-                  },
-                ).toList());
-              }),
+                      onPressed: () async {
+                        final produtos = ProdutoModel(
+                          ownerKey: produto.ownerKey,
+                          categoria: produto.categoria,
+                          cor: produto.cor,
+                          descricao: produto.descricao,
+                          marca: produto.marca,
+                          nome: produto.nome,
+                          preco: produto.preco,
+                          tamanho: produto.tamanho,
+                          imagem: produto.imagem,
+                        ).toMap();
+                        produtoController.addProduto(produtos);
+                        print(produtos);
+                      },
+                    ),
+                    style: OutlinedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.only(
+                            top: 10, bottom: 15, left: 10, right: 15),
+                        backgroundColor: Colors.black54),
+                  ),
+                ),
+              ));
+            },
+          );
+        },
+      ),
     );
   }
 }
+
+          
