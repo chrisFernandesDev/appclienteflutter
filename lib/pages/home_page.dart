@@ -5,6 +5,7 @@ import 'package:appclienteflutter/pages/edit_page.dart';
 import 'package:appclienteflutter/pages/feminino_page.dart';
 import 'package:appclienteflutter/pages/historico_page.dart';
 import 'package:appclienteflutter/pages/infantil_page.dart';
+import 'package:appclienteflutter/pages/lista_vendedores_page.dart';
 import 'package:appclienteflutter/pages/masculino_page.dart';
 import 'package:appclienteflutter/pages/pay_page.dart';
 import 'package:appclienteflutter/pages/promocoes_page.dart';
@@ -12,7 +13,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'carrinho_page.dart';
 
@@ -65,7 +65,6 @@ class _HomePageState extends State<HomePage> {
               child: UserAccountsDrawerHeader(
                 currentAccountPicture: CircleAvatar(
                     foregroundImage: MemoryImage(userController.model.imagem!)),
-
                 accountName: Text(userController.model.nome),
                 accountEmail: Text(userController.user!.email!),
               ),
@@ -116,7 +115,22 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PromocaoPage()),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PromocaoPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.sell),
+              title: const Text(
+                'Vendedores',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ListaVendedores()),
                 );
               },
             ),
@@ -249,20 +263,19 @@ class _HomePageState extends State<HomePage> {
 
 //PRODUTOS DO FIREBASE-------------------------------------------------------------
           Padding(
-              padding: const EdgeInsets.all(20),              
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Promoções da Semana",
-                    style: TextStyle(fontSize: 20), 
+                    style: TextStyle(fontSize: 20),
                   ),
                 ],
               )),
 
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              future: FirebaseFirestore.instance.collection('produtos')
-              .get(),
+              future: FirebaseFirestore.instance.collection('produtos').get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -308,25 +321,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 ).toList());
               }),
-
-          Container(
-            child: RatingBar.builder(
-              initialRating: 0,
-              minRating: 0,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                // print("");
-              },
-            ),
-          ),
-
         ],
       )),
     );
