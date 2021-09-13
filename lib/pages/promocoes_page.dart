@@ -106,7 +106,7 @@ class _PromocaoPageState extends State<PromocaoPage> {
                           height: 5,
                         ),
                         Text(
-                          '${produto.marca} ' + '  R\$ ${produto.preco}',
+                          '${produto.marca} ' + ' (${produto.categoria}) '+'  R\$ ${produto.preco}',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                           
