@@ -17,13 +17,13 @@ class PedidoModel {
         // key: map['key'],
         clienteKey: map['clienteKey'],
         pedido: map['pedido'],
-        clienteNome: map['clienteNome']
+        clienteNome: map['clienteNome'],
       );
 
        Map<String, dynamic> toMap() => {
         // 'key': key,
         'clienteKey': clienteKey,
         'pedido': pedido,
-        'clienteNome': clienteNome
+        'clienteNome': clienteNome,
       };
 }
