@@ -15,7 +15,6 @@ class MasculinoPage extends StatefulWidget {
   _MasculinoPageState createState() => _MasculinoPageState();
 }
 
-// heloo everybody
 class _MasculinoPageState extends State<MasculinoPage> {
   late final userController = Provider.of<UserController>(
     context,
