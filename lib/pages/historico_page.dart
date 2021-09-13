@@ -23,6 +23,19 @@ class _HistoricoPageState extends State<HistoricoPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Histórico de compras"),
+          flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+        ),
         ),
         body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: FirebaseFirestore.instance

@@ -25,6 +25,7 @@ class _PromocaoPageState extends State<PromocaoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         title: Text(
           "Promoções",
           style: TextStyle(

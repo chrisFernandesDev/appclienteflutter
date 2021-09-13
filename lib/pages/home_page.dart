@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: Column(
           children: [
-            Container(
+            DrawerHeader(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     colors: <Color>[
@@ -63,13 +63,19 @@ class _HomePageState extends State<HomePage> {
                     tileMode: TileMode.clamp),
               ),
               child: UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                    foregroundImage: MemoryImage(userController.model.imagem!)),
+                decoration: BoxDecoration(
+                  color: Color(0x00f8f9fa),
+                ),
                 accountName: Text(userController.model.nome),
                 accountEmail: Text(userController.user!.email!),
+                currentAccountPicture: CircleAvatar(
+                    foregroundImage: MemoryImage(userController.model.imagem!)),
+                    
+                
               ),
             ),
             ListTile(
+              
               leading: Icon(Icons.male),
               title: const Text(
                 'Masculino',
@@ -153,7 +159,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: Icon(Icons.history),
               title: const Text(
                 'Histórico de Compras',
                 style: TextStyle(fontSize: 18),
@@ -263,13 +269,13 @@ class _HomePageState extends State<HomePage> {
 
 //PRODUTOS DO FIREBASE-------------------------------------------------------------
           Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Promoções da Semana",
-                    style: TextStyle(fontSize: 20),
+                    "Nossos Produtos",
+                    style: TextStyle(fontSize: 25),
                   ),
                 ],
               )),
@@ -292,30 +298,33 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                     children: produtos.map(
                   (produto) {
-                    return ListTile(
-                      leading: produto.imagem != null
-                          ? Image.memory(
-                              produto.imagem!,
-                              fit: BoxFit.contain,
-                              width: 72,
-                              height: 120,
-                            )
-                          : Container(
-                              width: 125,
-                              height: 125,
-                              color: Colors.blue,
-                            ),
-                      title: Text(
-                        produto.marca,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      subtitle: Text(
-                        produto.descricao,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      trailing: Text(
-                        "R\$ ${produto.preco}",
-                        style: TextStyle(fontSize: 16),
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: ListTile(
+                        leading: produto.imagem != null
+                            ? Image.memory(
+                                produto.imagem!,
+                                fit: BoxFit.contain,
+                                width: 72,
+                                height: 120,
+                              )
+                            : Container(
+                                width: 125,
+                                height: 125,
+                                color: Colors.blue,
+                              ),
+                        title: Text(
+                          produto.marca,
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        subtitle: Text(
+                          produto.descricao,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        trailing: Text(
+                          "R\$ ${produto.preco}",
+                          style: TextStyle(fontSize: 22),
+                        ),
                       ),
                     );
                   },

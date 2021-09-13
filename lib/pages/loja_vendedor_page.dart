@@ -12,6 +12,19 @@ class _LojaVendedorState extends State<LojaVendedor> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Loja do Vendedor'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  
+                  colors: <Color>[
+                  Color(0xfff8f9fa),
+                  Color(0xffced4da),
+                  Color(0xff89c2d9),
+                  Color(0xff014f86),
+              ]
+              )
+              ),
+        ),
       ),
     );
   }
