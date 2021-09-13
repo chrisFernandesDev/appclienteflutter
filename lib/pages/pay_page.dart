@@ -42,10 +42,10 @@ class _PayPageState extends State<PayPage> {
               )
               ),
         ),
-       ),
+      ),
 
-       body:Column(
-         mainAxisAlignment: MainAxisAlignment.center,
+      body:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           
           ListTile(
@@ -58,15 +58,15 @@ class _PayPageState extends State<PayPage> {
                 fontWeight: FontWeight.w300,
                   letterSpacing: -1.5)
               )
-               
-               
+      
+            
             ),
           ), 
 
           Container(
                     
                     child: Image.asset(
-                      "img/formas-pagto1.jpg",
+                      "img/formas-pagto1.png",
                       height: 420,
                       width: 420,
                       alignment: Alignment.center,
@@ -74,7 +74,7 @@ class _PayPageState extends State<PayPage> {
                     ),
                     
                   ),
-           
+        
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -105,14 +105,14 @@ class _PayPageState extends State<PayPage> {
             
           ),
 
-                 
-       ],
+              
+      ],
           
           
               
                 
         
-         
+      
         
       ) ,
     );

@@ -118,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     textCapitalization: TextCapitalization.words,
                     keyboardType: TextInputType.text,
+                    obscureText: true,
                     onChanged: (texto) => senha = texto,
                     style: TextStyle(fontSize: 16.0, color: Color(0xff343a40)),
                     decoration: InputDecoration(
@@ -127,6 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.grey,
                       ),
                       hintText: 'Senha',
+                      
                       hintStyle: TextStyle(fontSize: 16.0, ),
                     ),
                   ),

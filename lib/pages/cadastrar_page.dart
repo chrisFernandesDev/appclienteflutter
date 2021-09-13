@@ -102,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.user,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'Name',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -132,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.file,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'CPF',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -162,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.locationArrow,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'Endereço',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -192,7 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.animation_rounded,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'CEP',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -222,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.phone,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'Telefone',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -252,7 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.email,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'Email',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -283,7 +283,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.lock,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                         hintText: 'Senha',
                         hintStyle: TextStyle(fontSize: 16.0),
