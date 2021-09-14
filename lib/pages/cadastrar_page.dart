@@ -1,3 +1,4 @@
+  
 import 'dart:typed_data';
 
 import 'package:appclienteflutter/controllers/user_controllers.dart';
@@ -36,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Nova Conta"),
-        flexibleSpace: Container(
+         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   
@@ -102,7 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.user,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Name',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -132,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.file,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'CPF',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -162,7 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.locationArrow,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Endereço',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -192,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.animation_rounded,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'CEP',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -222,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.phone,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Telefone',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -252,7 +253,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           Icons.email,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Email',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -283,7 +284,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         border: InputBorder.none,
                         icon: Icon(
                           FontAwesomeIcons.lock,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         hintText: 'Senha',
                         hintStyle: TextStyle(fontSize: 16.0),
@@ -305,14 +306,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           });
                         }
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Icon(file != null ? Icons.check : Icons.upload),
-                            Text("Adicionar foto de perfil"),
-                          ],
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(file != null ? Icons.check : Icons.upload),
+                          Text("Adicionar foto de perfil"),
+                        ],
                       ),
                 ),
                     
@@ -326,7 +324,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         colors: <Color>[
                           Color.fromRGBO(232,231,238,1),
                           Color.fromRGBO(48,136,233,1),
-                      
+                         
                           ],
                         ),
                     ),
