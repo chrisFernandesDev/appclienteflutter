@@ -94,9 +94,12 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                                     produtoController.produto[index]);
                                 // print(produtoController.produto[index]);
                               },
-                              child: FaIcon(
-                                FontAwesomeIcons.solidTrashAlt,
-                                size: 15,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidTrashAlt,
+                                  size: 25,
+                                ),
                               ),
                             ),
                   
@@ -106,31 +109,34 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                       );
                 }),  
                 InkWell(
-                    child: TextButton(
-                      child: Text('Comprar'),
-                      onPressed: () {
-                        final novaCompra = PedidoModel(
-                          clienteKey: userController.user!.uid,
-                          pedido: produtoController.produto,
-                          clienteNome: userController.model.nome,
-                          // key: userController.model.key!
-                        ).toMap();
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextButton(
+                        child: Text('Comprar', style: TextStyle(fontSize: 25)),
+                        onPressed: () {
+                          final novaCompra = PedidoModel(
+                            clienteKey: userController.user!.uid,
+                            pedido: produtoController.produto,
+                            clienteNome: userController.model.nome,
+                            // key: userController.model.key!
+                          ).toMap();
 
-                        FirebaseFirestore.instance
-                            .collection('vendas')
-                            .add(novaCompra);
+                          FirebaseFirestore.instance
+                              .collection('vendas')
+                              .add(novaCompra);
 
-                        setState(() {
-                          produtoController.produto.clear();
-                        });
+                          setState(() {
+                            produtoController.produto.clear();
+                          });
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("Compra Realizada"),
-                          ),
-                        );
-                        Navigator.pop(context);
-                      },
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Compra Realizada"),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
                   )
           ]),

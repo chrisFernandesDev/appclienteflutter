@@ -42,31 +42,31 @@ class _PayPageState extends State<PayPage> {
               )
               ),
         ),
-       ),
+      ),
 
-       body:Column(
-         mainAxisAlignment: MainAxisAlignment.center,
+      body:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           
           ListTile(
             title: Text(
               "Formas de Pagamentos Disponíveis",
               textAlign: TextAlign.center,
-              style: GoogleFonts.martel(
-              textStyle: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w300,
-                  letterSpacing: -1.5)
+              style: (
+              TextStyle(
+                fontSize: 23)
+                // fontWeight: FontWeight.w300,
+                  // letterSpacing: -1.5)
               )
-               
-               
+      
+            
             ),
           ), 
 
           Container(
                     
                     child: Image.asset(
-                      "img/formas-pagto1.jpg",
+                      "img/formas-pagto1.png",
                       height: 420,
                       width: 420,
                       alignment: Alignment.center,
@@ -74,7 +74,7 @@ class _PayPageState extends State<PayPage> {
                     ),
                     
                   ),
-           
+        
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -83,7 +83,7 @@ class _PayPageState extends State<PayPage> {
                             icon: FaIcon(
                               FontAwesomeIcons.envelopeSquare,
                               size: 50,
-                              color: Colors.black,
+                              color: Colors.red,
                               
                             ),
                             onPressed: () async =>
@@ -96,7 +96,7 @@ class _PayPageState extends State<PayPage> {
                     icon: FaIcon(
                       FontAwesomeIcons.whatsapp,
                       size: 50,
-                      color: Colors.black,
+                      color: Colors.green,
                     ),
                     onPressed: () async =>
                         await launch("https://wa.me/${5511960232774}")
@@ -105,14 +105,14 @@ class _PayPageState extends State<PayPage> {
             
           ),
 
-                 
-       ],
+              
+      ],
           
           
               
                 
         
-         
+      
         
       ) ,
     );
