@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Nova Conta"),
-         flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   
@@ -305,11 +305,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           });
                         }
                       },
-                      child: Row(
-                        children: [
-                          Icon(file != null ? Icons.check : Icons.upload),
-                          Text("Adicionar foto de perfil"),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Icon(file != null ? Icons.check : Icons.upload),
+                            Text("Adicionar foto de perfil"),
+                          ],
+                        ),
                       ),
                 ),
                     
@@ -323,7 +326,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         colors: <Color>[
                           Color.fromRGBO(232,231,238,1),
                           Color.fromRGBO(48,136,233,1),
-                         
+                      
                           ],
                         ),
                     ),

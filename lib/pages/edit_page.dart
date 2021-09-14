@@ -116,11 +116,14 @@ class _EditPageState extends State<EditPage> {
                     });
                   }
                 },
-                child: Row(
-                  children: [
-                    Icon(file != null ? Icons.check : Icons.upload),
-                    Text("Adicionar imagem"),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(file != null ? Icons.check : Icons.upload),
+                      Text("Adicionar imagem"),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -145,7 +148,10 @@ class _EditPageState extends State<EditPage> {
 
                     Navigator.pop(context);
                   },
-                  child: Text("Atualizar Usuario")),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Atualizar Usuario", style: TextStyle(fontSize: 20)),
+                  )),
                   
             ],
           ),
