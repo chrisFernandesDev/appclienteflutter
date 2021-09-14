@@ -21,6 +21,7 @@ class VendedorModel {
     );
 
     Map<String, dynamic> toMap() => {
+      'key': key,
       'nome': nome,
       'imagem': imagem != null ? Blob(imagem!) : null,
     };

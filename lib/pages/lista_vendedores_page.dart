@@ -28,7 +28,7 @@ class _ListaVendedoresState extends State<ListaVendedores> {
                 final vendedores = snapshot.data!.docs.map(
                   (item) {
                     final dados = item.data();
-                    return VendedorModel.fromMap(dados);
+                    return VendedorModel.fromMap(dados, item.id);
                   },
                 ).toList();
 
@@ -55,9 +55,18 @@ class _ListaVendedoresState extends State<ListaVendedores> {
                         style: TextStyle(fontSize: 16),
                       ),
                       onTap: () async{
+                        
+                      //  final dados = VendedorModel(
+                      //    nome: ,
+                      //    key: 
+                      //    ).toMap(); 
+                      //  await
                        Navigator.push(context,
                        MaterialPageRoute(builder: (context) => LojaVendedor()),
                        );
+                    setState(() {
+
+                    });
                       },
                     );
                   },
